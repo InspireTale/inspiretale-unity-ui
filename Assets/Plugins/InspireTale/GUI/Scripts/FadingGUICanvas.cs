@@ -19,6 +19,11 @@ namespace InspireTale.UI
 
         public override async UniTask Show()
         {
+            if (isShow)
+            {
+                return;
+            }
+
             await base.Show();
             await this.canvasGroupFadingTransition.FadeIn(this.fadeDuration);
             this.canvasGroup.interactable = true;
@@ -27,6 +32,11 @@ namespace InspireTale.UI
 
         public override async UniTask Hide()
         {
+            if (!isShow)
+            {
+                return;
+            }
+
             await this.canvasGroupFadingTransition.FadeOut(this.fadeDuration);
             this.canvasGroup.interactable = false;
             this.canvasGroup.blocksRaycasts = false;
