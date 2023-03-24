@@ -7,10 +7,22 @@ namespace InspireTale.UI
     public class BaseGUICanvas : MonoBehaviour
     {
         [SerializeField]
-        private CanvasGroup canvasGroup;
+        protected bool isBlockRaycast;
 
-        [SerializeField]
-        private bool isBlockRaycast;
+        protected CanvasGroup canvasGroup;
+
+        protected GameObject[] childrenList;
+
+        protected virtual void Awake()
+        {
+            this.canvasGroup = GetComponent<CanvasGroup>();
+            this.childrenList = new GameObject[this.transform.childCount];
+            for(int i =0; i<this.transform.childCount; i++)
+            {
+                Transform child = this.transform.GetChild(i);
+                childrenList[i] = child.gameObject;
+            }
+        }
 
         public bool isShow
         {
@@ -22,6 +34,11 @@ namespace InspireTale.UI
 
         public virtual UniTask Show()
         {
+            foreach(GameObject child in this.childrenList)
+            {
+                child.SetActive(true);
+            }
+
             canvasGroup.alpha = 1;
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = this.isBlockRaycast;
@@ -33,6 +50,11 @@ namespace InspireTale.UI
             canvasGroup.alpha = 0;
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
+
+            foreach(GameObject child in this.childrenList)
+            {
+                child.SetActive(false);
+            }
             return UniTask.CompletedTask;
         }
     }
