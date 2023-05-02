@@ -34,11 +34,6 @@ namespace InspireTale.UI
 
         public virtual UniTask Show()
         {
-            foreach(GameObject child in this.childrenList)
-            {
-                child.SetActive(true);
-            }
-
             canvasGroup.alpha = 1;
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = this.isBlockRaycast;
@@ -50,11 +45,6 @@ namespace InspireTale.UI
             canvasGroup.alpha = 0;
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
-
-            foreach(GameObject child in this.childrenList)
-            {
-                child.SetActive(false);
-            }
             return UniTask.CompletedTask;
         }
     }
