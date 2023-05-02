@@ -21,10 +21,19 @@ namespace InspireTale.UI
 
         protected string unAdjustedText;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            this.text = this.m_Text;
+        }
+
+
+#if UNITY_EDITOR
         protected override void OnValidate()
         {
             base.OnValidate();
             this.text = this.m_Text;
         }
+#endif
     }
 }

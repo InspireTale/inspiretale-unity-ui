@@ -1,8 +1,9 @@
-using UnityEditor;
-using UnityEngine;
 
 namespace InspireTale.UI
 {
+#if UNITY_EDITOR
+    using UnityEngine;
+    using UnityEditor;
     public class INSTextMenu : MonoBehaviour
     {
         [MenuItem("GameObject/UI/InspierTale/INSText")]
@@ -27,4 +28,5 @@ namespace InspireTale.UI
             Selection.activeObject = gameObject;
         }
     }
+#endif
 }
