@@ -6,6 +6,7 @@ namespace InspireTale.UI
     [RequireComponent(typeof(CanvasGroupFadingTransition))]
     public class FadingGUICanvas : BaseGUICanvas
     {
+        [Tooltip("Fade in/out transition duration.")]
         [SerializeField]
         private float fadeDuration = 0.5f;
 
@@ -19,7 +20,7 @@ namespace InspireTale.UI
 
         public override async UniTask Show()
         {
-            if (isShow)
+            if (this.IsShow)
             {
                 return;
             }
@@ -32,7 +33,7 @@ namespace InspireTale.UI
 
         public override async UniTask Hide()
         {
-            if (!isShow)
+            if (!this.IsShow)
             {
                 return;
             }
