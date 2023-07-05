@@ -18,12 +18,12 @@ namespace InspireTale.UI
             this.canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public UniTask FadeIn(float duration_s=1, CancellationToken cancellationToken = default)
+        public UniTask FadeIn(float duration_s = 1, CancellationToken cancellationToken = default)
         {
             return this.DoFadeCanvasAlpha(0, 1, duration_s).WithCancellation(cancellationToken);
         }
 
-        public UniTask FadeOut(float duration_s=1, CancellationToken cancellationToken = default)
+        public UniTask FadeOut(float duration_s = 1, CancellationToken cancellationToken = default)
         {
             return this.DoFadeCanvasAlpha(1, 0, duration_s).WithCancellation(cancellationToken);
         }
