@@ -6,7 +6,7 @@ using UnityEngine;
 namespace InspireTale.UI
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class CanvasGroupFadingTransition : MonoBehaviour
+    public class CanvasGroupFadeTransition : MonoBehaviour
     {
         [SerializeField]
         private AnimationCurve fadingCurve;
