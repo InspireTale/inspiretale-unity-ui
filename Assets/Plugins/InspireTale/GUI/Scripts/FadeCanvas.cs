@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace InspireTale.UI
 {
-    [RequireComponent(typeof(CanvasGroupFadingTransition))]
-    public class FadingGUICanvas : BaseGUICanvas
+    [RequireComponent(typeof(CanvasGroupFadeTransition))]
+    public class FadeCanvas : BaseGUICanvas
     {
         [Tooltip("Fade in/out transition duration.")]
         [SerializeField]
         private float fadeDuration = 0.5f;
 
-        private CanvasGroupFadingTransition canvasGroupFadingTransition;
+        private CanvasGroupFadeTransition canvasGroupFadeTransition;
 
         protected override void Awake()
         {
             base.Awake();
-            this.canvasGroupFadingTransition = GetComponent<CanvasGroupFadingTransition>();
+            this.canvasGroupFadeTransition = GetComponent<CanvasGroupFadeTransition>();
         }
 
         public override async UniTask Show()
@@ -26,7 +26,7 @@ namespace InspireTale.UI
             }
 
             await base.Show();
-            await this.canvasGroupFadingTransition.FadeIn(this.fadeDuration);
+            await this.canvasGroupFadeTransition.FadeIn(this.fadeDuration);
             this.canvasGroup.interactable = true;
             this.canvasGroup.blocksRaycasts = this.isBlockRaycast;
         }
@@ -38,7 +38,7 @@ namespace InspireTale.UI
                 return;
             }
 
-            await this.canvasGroupFadingTransition.FadeOut(this.fadeDuration);
+            await this.canvasGroupFadeTransition.FadeOut(this.fadeDuration);
             this.canvasGroup.interactable = false;
             this.canvasGroup.blocksRaycasts = false;
             await base.Hide();
