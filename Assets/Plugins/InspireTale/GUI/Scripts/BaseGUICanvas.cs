@@ -6,8 +6,12 @@ namespace InspireTale.UI
     [RequireComponent(typeof(CanvasGroup))]
     public class BaseGUICanvas : MonoBehaviour
     {
+        [Tooltip("To make this canvas block the raycast.")]
         [SerializeField]
         protected bool isBlockRaycast;
+        [Tooltip("Enable this to use object active for displaying instead of canvas group alpha.")]
+        [SerializeField]
+        protected bool isUseObjectActive;
 
         protected CanvasGroup canvasGroup;
 
@@ -17,20 +21,14 @@ namespace InspireTale.UI
         {
             this.canvasGroup = GetComponent<CanvasGroup>();
             this.childrenList = new GameObject[this.transform.childCount];
-            for(int i =0; i<this.transform.childCount; i++)
+            for (int i = 0; i < this.transform.childCount; i++)
             {
                 Transform child = this.transform.GetChild(i);
                 childrenList[i] = child.gameObject;
             }
         }
 
-        public bool isShow
-        {
-            get
-            {
-                return this.canvasGroup?.alpha == 1;
-            }
-        }
+        public bool IsShow => this.canvasGroup.alpha == 1;
 
         public virtual UniTask Show()
         {
