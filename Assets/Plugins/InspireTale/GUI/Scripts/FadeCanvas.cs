@@ -1,4 +1,3 @@
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -12,8 +11,6 @@ namespace InspireTale.UI
         private float fadeDuration = 0.5f;
 
         protected CanvasGroupFadeTransition canvasGroupFadeTransition;
-        protected CancellationTokenSource showTransitionTokenSource;
-        protected CancellationTokenSource hideTransitionTokenSource;
 
         protected override void Awake()
         {
@@ -23,21 +20,25 @@ namespace InspireTale.UI
 
         public override async UniTask Show()
         {
-            this.showTransitionTokenSource?.Cancel();
-            this.showTransitionTokenSource?.Dispose();
-            this.showTransitionTokenSource = new();
+            if (this.IsShow)
+            {
+                return;
+            }
+
             await base.Show();
-            await this.canvasGroupFadeTransition.FadeIn(this.fadeDuration, this.showTransitionTokenSource.Token);
+            await this.canvasGroupFadeTransition.FadeIn(this.fadeDuration);
             this.canvasGroup.interactable = true;
             this.canvasGroup.blocksRaycasts = this.isBlockRaycast;
         }
 
         public override async UniTask Hide()
         {
-            this.hideTransitionTokenSource?.Cancel();
-            this.hideTransitionTokenSource?.Dispose();
-            this.hideTransitionTokenSource = new();
-            await this.canvasGroupFadeTransition.FadeOut(this.fadeDuration, this.hideTransitionTokenSource.Token);
+            if (!this.IsShow)
+            {
+                return;
+            }
+
+            await this.canvasGroupFadeTransition.FadeOut(this.fadeDuration);
             this.canvasGroup.interactable = false;
             this.canvasGroup.blocksRaycasts = false;
             await base.Hide();
