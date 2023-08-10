@@ -28,10 +28,11 @@ namespace InspireTale.UI
             }
         }
 
-        public bool IsShow => this.canvasGroup.alpha == 1;
+        public bool IsShow { get; protected set; }
 
         public virtual UniTask Show()
         {
+            this.IsShow = true;
             canvasGroup.alpha = 1;
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = this.isBlockRaycast;
@@ -40,6 +41,7 @@ namespace InspireTale.UI
 
         public virtual UniTask Hide()
         {
+            this.IsShow = false;
             canvasGroup.alpha = 0;
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
