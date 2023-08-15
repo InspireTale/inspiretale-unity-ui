@@ -10,8 +10,9 @@ namespace InspireTale.UI
         [SerializeField]
         private float fadeDuration = 0.5f;
 
-        protected CanvasGroupFadeTransition canvasGroupFadeTransition;
+        public bool IsFading => this.canvasGroup.alpha != 0 || this.canvasGroup.alpha != 1;
 
+        protected CanvasGroupFadeTransition canvasGroupFadeTransition;
         protected override void Awake()
         {
             base.Awake();
